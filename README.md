@@ -14,17 +14,26 @@ On Zabbix server
  - Listen TCP/UDP 
  1. vi /etc/rsyslog.conf
  `Find the lines and set ass follow:`
-`# Provides UDP syslog reception`
-`# for parameters see http://www.rsyslog.com/doc/imudp.html`
+ 
+\# Provides UDP syslog reception
+
+\# for parameters see http://www.rsyslog.com/doc/imudp.html
+
 module(load="imudp") # needs to be done just once
+
 input(type="imudp" port="514")
 
-`# Provides TCP syslog reception`
-`# for parameters see http://www.rsyslog.com/doc/imtcp.html`
+
+\# Provides TCP syslog reception
+
+\# for parameters see http://www.rsyslog.com/doc/imtcp.html
+
 module(load="imtcp") # needs to be done just once
+
 input(type="imtcp" port="514")
 
 ` After directive GLOBAL DIRECTIVES add'
+
 \# Template to receive logs\
 $template tplremote,"%timegenerated% %HOSTNAME% %fromhost-ip% %syslogtag%%msg:::drop-last-lf%\n"
 $template RemoteLogs,"/var/log/remotelog/%fromhost-ip%.log"
@@ -71,6 +80,7 @@ chmod 750 /etc/zabbix/scripts/
 4. Create Macros for monitoring period, NAS IP and community name (in template they are created, you must only modify them)
 5. Important: You must set NAS IP as Syslogserver IP (or where are the logs), because Zabbix will look on the host for logs, not on the NAS
 6. Don't name your backup tasks using ", ' or any Zabbix restricted parameter for the item keys
+7. Trigger will be activated when in log zabbix will find `Failed to run backup task` or `Backup task was cancelled`
 
 
 
