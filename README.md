@@ -1,7 +1,7 @@
 # Synology-Backup-LLD-Monitor
 ## Monitoring will be done in 2 steps
-## Create and setup Syslog server
-## Setup backup monitoring
+### Create and setup Syslog server
+### Setup backup monitoring
 
 1. Create syslogserver
 
@@ -43,6 +43,7 @@ $template RemoteLogs,"/var/log/remotelog/%fromhost-ip%.log"
 
 ` Some explain: `
 `the $template tplremote .. will format the log as:`
+
 `Jun 26 16:35:15 APP_NAS 172.16.5.3 Backup SYSTEM:#011[Local][backup] Backup task started.`
 
 2. Create folder for logs
